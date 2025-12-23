@@ -1,0 +1,26 @@
+# Foundry
+out/
+cache/
+broadcast/
+*.gas-report
+
+# Dependencies
+lib/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+node_modules/
