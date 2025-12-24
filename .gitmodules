@@ -1,0 +1,3 @@
+[submodule "reactive-oracle-hub/lib/openzeppelin-contracts"]
+	path = reactive-oracle-hub/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
