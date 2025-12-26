@@ -1,3 +1,12 @@
 [submodule "reactive-oracle-hub/lib/openzeppelin-contracts"]
 	path = reactive-oracle-hub/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "reactive-lending-protocol/lib/forge-std"]
+	path = reactive-lending-protocol/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "reactive-lending-protocol/lib/openzeppelin-contracts"]
+	path = reactive-lending-protocol/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "reactive-lending-protocol/lib/reactive-lib"]
+	path = reactive-lending-protocol/lib/reactive-lib
+	url = https://github.com/reactive-network/reactive-lib
