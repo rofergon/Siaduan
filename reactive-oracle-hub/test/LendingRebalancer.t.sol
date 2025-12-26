@@ -41,7 +41,6 @@ contract LendingRebalancerTest is Test {
         // Deploy rebalancer without system contract (simulates ReactVM)
         rebalancer = new LendingRebalancer(
             ORIGIN_CHAIN_ID,
-            address(0), // No system contract = VM mode
             RATE_COORDINATOR,
             DEST_CHAIN_ID,
             VAULT
