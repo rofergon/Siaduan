@@ -1,0 +1,98 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "forge-std/Script.sol";
+import "../src/destination/LendingVault.sol";
+import "../src/destination/adapters/MockLendingPool.sol";
+import "../src/mocks/MockERC20.sol";
+
+/**
+ * @title TestLendingFlow
+ * @notice On-chain test script to verify the lending vault flow
+ */
+contract TestLendingFlow is Script {
+    // Deployed addresses on Sepolia
+    address constant VAULT = 0xa968EEB8d2897464E41De673D79f1e289A3B0b7d;
+    address constant POOL_A = 0x242f6bcCA3208ff2b81F57Af6B9DC281bf1EabF4;
+    address constant POOL_B = 0x7952AD383bC3B3443E36d58eC585C49824E4e489;
+    address constant MOCK_USDC = 0xf044c58496693C106a7EaE5460d39c1E99ABE074;
+    
+    function run() external {
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        address deployer = vm.addr(deployerPrivateKey);
+        
+        console.log("=== Cross-Chain Lending Flow Test ===");
+        console.log("Deployer:", deployer);
+        console.log("");
+        
+        MockUSDC token = MockUSDC(MOCK_USDC);
+        LendingVault vault = LendingVault(payable(VAULT));
+        MockLendingPool poolA = MockLendingPool(POOL_A);
+        MockLendingPool poolB = MockLendingPool(POOL_B);
+        
+        // Check current state
+        console.log("--- Current State ---");
+        console.log("USDC Balance:", token.balanceOf(deployer));
+        console.log("Vault Total Assets:", vault.getTotalAssets());
+        console.log("User Shares:", vault.shares(deployer));
+        
+        (uint256 allocA, uint256 allocB, uint256 idle) = vault.getAllocations();
+        console.log("Allocation Pool A:", allocA);
+        console.log("Allocation Pool B:", allocB);
+        console.log("Idle in Vault:", idle);
+        
+        console.log("");
+        console.log("Pool A Rate:", poolA.getSupplyRate(MOCK_USDC));
+        console.log("Pool B Rate:", poolB.getSupplyRate(MOCK_USDC));
+        
+        vm.startBroadcast(deployerPrivateKey);
+        
+        // Step 1: Mint more USDC if needed
+        if (token.balanceOf(deployer) < 1000 * 1e6) {
+            console.log("");
+            console.log("--- Step 1: Minting USDC ---");
+            token.mint(1000 * 1e6);
+            console.log("Minted 1000 USDC");
+        }
+        
+        // Step 2: Approve vault to spend USDC
+        console.log("");
+        console.log("--- Step 2: Approving Vault ---");
+        token.approve(VAULT, type(uint256).max);
+        console.log("Approved vault for max USDC spend");
+        
+        // Step 3: Deposit into vault
+        console.log("");
+        console.log("--- Step 3: Depositing into Vault ---");
+        uint256 depositAmount = 500 * 1e6; // 500 USDC
+        uint256 shares = vault.deposit(depositAmount);
+        console.log("Deposited:", depositAmount);
+        console.log("Received shares:", shares);
+        
+        // Step 4: Check allocation after deposit
+        console.log("");
+        console.log("--- State After Deposit ---");
+        console.log("Vault Total Assets:", vault.getTotalAssets());
+        (allocA, allocB, idle) = vault.getAllocations();
+        console.log("Allocation Pool A:", allocA);
+        console.log("Allocation Pool B:", allocB);
+        
+        // Step 5: Change Pool B rate to trigger rebalance signal
+        console.log("");
+        console.log("--- Step 5: Changing Pool B Rate (triggers reactive) ---");
+        poolB.setSupplyRate(MOCK_USDC, 800); // 8% - much higher than Pool A's 3%
+        console.log("New Pool B Rate: 800 (8%)");
+        console.log("This emits PoolRateUpdated event that Reactive Network will see!");
+        
+        vm.stopBroadcast();
+        
+        console.log("");
+        console.log("=== Test Complete ===");
+        console.log("The LendingRebalancer on Lasna should now:");
+        console.log("1. Receive the PoolRateUpdated event");
+        console.log("2. Calculate rate differential (8% vs 3% = 166% > 2% threshold)");
+        console.log("3. Emit a Callback to trigger rebalance on the Vault");
+        console.log("");
+        console.log("Check Lasna explorer for the rebalance callback!");
+    }
+}
