@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { BrowserProvider, Contract, formatUnits, parseUnits, MaxUint256 } from 'ethers';
 import { useAppKit, useAppKitAccount, useAppKitProvider, useAppKitNetwork } from '@reown/appkit/react';
-import { ADDRESSES, CHAIN_CONFIG } from './contracts/addresses';
+import { ADDRESSES, CHAIN_CONFIG, REACTIVE_ADDRESSES, REACTIVE_CONFIG } from './contracts/addresses';
 import { MockERC20ABI, LendingVaultABI, RateCoordinatorABI } from './contracts/abis';
 import './App.css';
 
@@ -329,6 +329,20 @@ function App() {
                 <h3>Idle</h3>
                 <p className="amount">{parseFloat(allocations.idle).toLocaleString()} mUSDC</p>
               </div>
+            </div>
+            <div className="reactive-info">
+              <h3>⚡ Reactive Network</h3>
+              <p>
+                Rebalancer: <code>{REACTIVE_ADDRESSES.LENDING_REBALANCER.slice(0, 10)}...{REACTIVE_ADDRESSES.LENDING_REBALANCER.slice(-8)}</code>
+              </p>
+              <a
+                href={`${REACTIVE_CONFIG.reactscan}/address/${REACTIVE_ADDRESSES.LENDING_REBALANCER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                📊 View on Reactscan
+              </a>
             </div>
           </section>
         </>
