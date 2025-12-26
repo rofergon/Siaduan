@@ -45,16 +45,14 @@ contract LendingRebalancer is AbstractReactive {
 
     constructor(
         uint256 _originChainId,
-        address _service,
         address _rateCoordinator,
         uint256 _destChainId,
         address _vault
-    ) payable {
+    ) payable AbstractReactive() {
         originChainId = _originChainId;
         
-        if (_service != address(0)) {
-            service = ISystemContract(payable(_service));
-        }
+        // service is now properly initialized by AbstractReactive() constructor
+        // which sets service = SERVICE_ADDR (0xfffFfF) and calls detectVm()
         
         rateCoordinator = _rateCoordinator;
         destChainId = _destChainId;
