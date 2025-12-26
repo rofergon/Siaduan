@@ -14,9 +14,9 @@ contract DeployRateCoordinator is Script {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         address deployer = vm.addr(deployerPrivateKey);
         
-        // Pool addresses from Sepolia deployment
-        address poolA = 0x242f6bcCA3208ff2b81F57Af6B9DC281bf1EabF4;
-        address poolB = 0x7952AD383bC3B3443E36d58eC585C49824E4e489;
+        // Pool addresses from NEW Sepolia deployment (Dec 25, 2025)
+        address poolA = 0x00FD6c43791752D46296F651d4e316661d90665f; // Pool Alpha
+        address poolB = 0xbf7298c0517937e563B82263D28911277df194B4; // Pool Beta
         
         console.log("Deployer:", deployer);
         console.log("Deploying RateCoordinator to Sepolia...");
