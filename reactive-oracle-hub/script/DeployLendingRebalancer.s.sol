@@ -35,9 +35,8 @@ contract DeployLendingRebalancer is Script {
         
         vm.startBroadcast(deployerPrivateKey);
         
-        LendingRebalancer rebalancer = new LendingRebalancer{value: 4 ether}(
+        LendingRebalancer rebalancer = new LendingRebalancer{value: 1 ether}(
             SEPOLIA_CHAIN_ID,      // Origin chain ID
-            SYSTEM_CONTRACT,       // System contract
             rateCoordinator,       // RateCoordinator address
             SEPOLIA_CHAIN_ID,      // Destination chain ID
             vault                  // Vault address
