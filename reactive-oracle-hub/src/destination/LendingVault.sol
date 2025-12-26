@@ -168,6 +168,20 @@ contract LendingVault is Ownable, ReentrancyGuard {
     ) external onlyReactive {
         require(_sender == authorizedReactVM, "Unauthorized ReactVM");
         
+        // If amount is 0, calculate optimal rebalance amount (50% of source pool)
+        if (amount == 0) {
+            if (direction) {
+                // A -> B: move 50% of Pool A's allocation
+                amount = poolA.allocation / 2;
+            } else {
+                // B -> A: move 50% of Pool B's allocation
+                amount = poolB.allocation / 2;
+            }
+        }
+        
+        // Skip if nothing to move
+        if (amount == 0) return;
+        
         if (direction) {
             // A -> B
             _withdrawFromPoolA(amount);
@@ -292,5 +306,22 @@ contract LendingVault is Ownable, ReentrancyGuard {
 
     function setRebalanceThreshold(uint256 _threshold) external onlyOwner {
         rebalanceThreshold = _threshold;
+    }
+
+    // ============ ETH Management for Reactive Callbacks ============
+    
+    /**
+     * @notice Allows the contract to receive ETH for Reactive Network callback payments
+     */
+    receive() external payable {}
+
+    /**
+     * @notice Allows owner to withdraw ETH from the contract
+     * @param amount Amount of ETH to withdraw (in wei)
+     */
+    function withdrawETH(uint256 amount) external onlyOwner {
+        require(address(this).balance >= amount, "Insufficient ETH balance");
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        require(success, "ETH transfer failed");
     }
 }
