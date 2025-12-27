@@ -19,6 +19,10 @@ export function WelcomeHero({ onLearnMore }) {
 
             {/* Main Hero Content */}
             <section className="hero-main">
+                <div className="hero-logo">
+                    <img src="/SiduonIcon.png" alt="Siaduan Protocol" className="main-logo" />
+                </div>
+
                 <div className="hero-badge">
                     <span className="badge-icon">🌐</span>
                     <span>Powered by Reactive Network</span>
