@@ -235,7 +235,7 @@ export function HowItWorks() {
                                         📋
                                     </button>
                                     <a
-                                        href={`https://lasna.reactscan.net/address/${contract.address}`}
+                                        href={`https://lasna.reactscan.net/address/0xab6e247b25463f76e81ababbb6b0b86b40d45d38/contract/${contract.address.toLowerCase()}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="explorer-link"
