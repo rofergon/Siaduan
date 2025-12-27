@@ -16,7 +16,10 @@ export function Layout({ children, activeView, onViewChange }) {
 
             <header className="header glass-panel">
                 <div className="header-content">
-                    <h1>🏦 Siaduan Protocol</h1>
+                    <div className="header-title-row">
+                        <img src="/SiduonIcon.png" alt="Siaduan" className="header-logo" />
+                        <h1>Siaduan Protocol</h1>
+                    </div>
                     <p className="subtitle">Cross-Chain Lending Vault powered by Reactive Network</p>
                 </div>
                 <nav className="header-nav">
