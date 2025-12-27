@@ -1,6 +1,6 @@
 import { Toaster } from 'react-hot-toast';
 
-export function Layout({ children }) {
+export function Layout({ children, activeView, onViewChange }) {
     return (
         <div className="app-container">
             <Toaster
@@ -19,6 +19,20 @@ export function Layout({ children }) {
                     <h1>🏦 Siaduan Protocol</h1>
                     <p className="subtitle">Cross-Chain Lending Vault powered by Reactive Network</p>
                 </div>
+                <nav className="header-nav">
+                    <button
+                        className={`nav-tab ${activeView === 'dashboard' ? 'active' : ''}`}
+                        onClick={() => onViewChange('dashboard')}
+                    >
+                        📊 Dashboard
+                    </button>
+                    <button
+                        className={`nav-tab ${activeView === 'how-it-works' ? 'active' : ''}`}
+                        onClick={() => onViewChange('how-it-works')}
+                    >
+                        📖 How It Works
+                    </button>
+                </nav>
             </header>
 
             <main className="main-content">
