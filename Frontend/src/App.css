@@ -66,6 +66,10 @@ body {
   margin-top: 1rem;
 }
 
+.header-content {
+  margin-bottom: 1rem;
+}
+
 .header h1 {
   font-size: 2rem;
   font-weight: 800;
@@ -78,6 +82,66 @@ body {
 .subtitle {
   color: var(--text-secondary);
 }
+
+/* Header Navigation */
+.header-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.nav-tab {
+  padding: 0.6rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav-tab.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+/* Welcome Screen */
+.welcome-screen {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: var(--glass-border);
+}
+
+.welcome-screen h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-screen p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
 
 /* Layout Grid */
 .dashboard-grid {
