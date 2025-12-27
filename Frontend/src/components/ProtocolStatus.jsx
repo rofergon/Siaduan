@@ -52,7 +52,7 @@ export function ProtocolStatus({ allocations, currentRates }) {
                 </div>
 
                 <a
-                    href={`${REACTIVE_CONFIG.reactscan}/address/${REACTIVE_ADDRESSES.LENDING_REBALANCER}`}
+                    href={`${REACTIVE_CONFIG.reactscan}/address/0xab6e247b25463f76e81ababbb6b0b86b40d45d38/contract/${REACTIVE_ADDRESSES.LENDING_REBALANCER}?screen=transactions`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-secondary full-width"
