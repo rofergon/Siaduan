@@ -84,8 +84,8 @@ The rebalancer sends a callback to Sepolia, instructing the LendingVault to move
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/your-repo/siaduan-protocol
-cd siaduan-protocol
+git clone https://github.com/rofergon/Siaduan
+cd Siaduan/reactive-lending-protocol
 forge install
 ```
 
@@ -139,7 +139,7 @@ cast call 0xf8Af4B57A22328Af51448A43eEF1bbdE8542852D \
 
 ### Reactscan (Reactive Network Explorer)
 Monitor the LendingRebalancer transactions:
-- [View on Reactscan](https://lasna.reactscan.net/address/0x8cC046205284913b2844995fB01281E2945DF76f)
+- [View on Reactscan](https://lasna.reactscan.net/address/0xab6e247b25463f76e81ababbb6b0b86b40d45d38/contract/0x8cc046205284913b2844995fb01281e2945df76f)
 
 ### Etherscan (Sepolia)
 - [LendingVault](https://sepolia.etherscan.io/address/0xf8Af4B57A22328Af51448A43eEF1bbdE8542852D)
