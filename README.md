@@ -138,7 +138,21 @@ forge build
 
 ---
 
-## 🔗 Links
+## � Future Mainnet Integrations
+
+The following adapters are implemented and ready for Mainnet deployment. These contracts allow the protocol to interact with major lending pools once the protocol launches on Ethereum Mainnet.
+
+| Contract | File | Purpose |
+|----------|------|---------|
+| **AaveV3Adapter** | [`AaveV3Adapter.sol`](./reactive-lending-protocol/src/destination/adapters/AaveV3Adapter.sol) | Adapter for Aave V3 Protocol |
+| **CompoundV3Adapter** | [`CompoundV3Adapter.sol`](./reactive-lending-protocol/src/destination/adapters/CompoundV3Adapter.sol) | Adapter for Compound V3 (Comet) Protocol |
+
+> [!NOTE]
+> These contracts are currently **NOT deployed**. They are intended for the production release of Siaduan Protocol.
+
+---
+
+## �🔗 Links
 
 - [Reactive Network Docs](https://dev.reactive.network/)
 - [Reactscan Explorer](https://lasna.reactscan.net/)
